@@ -1,0 +1,53 @@
+{
+	"name": "@staycaygowhere/web",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"test": "vitest",
+		"test:ui": "vitest watch --ui --coverage",
+		"test:e2e": "playwright test",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.5.0",
+		"@commitlint/config-conventional": "^17.4.4",
+		"@playwright/test": "^1.28.1",
+		"@sveltejs/adapter-node": "^1.2.0",
+		"@sveltejs/kit": "^1.5.0",
+		"@types/rollup-plugin-css-only": "^3.1.0",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"@vitest/coverage-c8": "^0.29.1",
+		"@vitest/ui": "^0.29.1",
+		"autoprefixer": "^10.4.13",
+		"eslint": "^8.28.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"pretty-quick": "^3.1.3",
+		"rollup-plugin-copy": "^3.4.0",
+		"rollup-plugin-css-only": "^4.3.0",
+		"svelte": "^3.54.0",
+		"svelte-check": "^3.0.1",
+		"tailwindcss": "^3.2.7",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.3",
+		"vite": "^4.1.4",
+		"vitest": "^0.29.1"
+	},
+	"type": "module",
+	"packageManager": "npm@9.6.2",
+	"dependencies": {
+		"@shoelace-style/shoelace": "^2.1.0",
+		"jose": "^4.13.1",
+		"sk-auth": "^0.4.1"
+	}
+}

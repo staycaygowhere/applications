@@ -1,0 +1,25 @@
+{
+  "name": "staycaygowhere",
+  "version": "0.0.1",
+  "description": "Staycay Go Where",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "dev": "turbo run dev",
+    "prepare": "husky install"
+  },
+  "author": "Dois Koh",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3",
+    "turbo": "^1.8.6"
+  },
+  "type": "module",
+  "packageManager": "npm@9.6.2",
+  "workspaces": [
+    "apps/*",
+    "apps/api/*"
+  ]
+}
