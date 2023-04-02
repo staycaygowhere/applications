@@ -32,6 +32,10 @@ FROM node:18.15-alpine AS runner
 
 WORKDIR /app
 
-COPY --from=installer /app/apps/api/template/ ./build
+COPY --from=installer /app/apps/api/template/ apps/api/template/
+COPY --from=installer /app/node_modules node_modules
 
-CMD [ "node", "build/src" ]
+RUN ls
+RUN ls ./apps/api/template/
+
+CMD [ "node", "./apps/api/template/src" ]

@@ -32,6 +32,11 @@ FROM node:18.15-alpine AS runner
 
 WORKDIR /app
 
-COPY --from=installer /app/apps/web/build ./build
+COPY --from=installer /app/apps/web/build apps/web/build
+COPY --from=installer /app/apps/web/package.json apps/web/package.json
+COPY --from=installer /app/node_modules node_modules
 
-CMD [ "node", "build" ]
+RUN ls
+RUN ls ./apps/web/build
+
+CMD [ "node", "./apps/web/build" ]
