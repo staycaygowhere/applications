@@ -4,14 +4,7 @@
         "dev": {
             "cache": false
         },
-        "build": {
-            "outputs": [
-                "dist/**"
-            ],
-            "dependsOn": [
-                "^build"
-            ]
-        },
+        "build": {},
         "test": {
             "dependsOn": [
                 "^build"
