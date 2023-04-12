@@ -3,7 +3,7 @@ version: "3"
 services:
   web:
     container_name: web
-    image: ghcr.io/staycaygowhere/web:${TAG}
+    image: ${CONTAINER_REGISTRY}/web:${TAG}
     build:
       context: .
       dockerfile: ./apps/web/Dockerfile
@@ -14,7 +14,7 @@ services:
       - app_network
   api-sample:
     container_name: api-sample
-    image: ghcr.io/staycaygowhere/api-sample:${TAG}
+    image: ${CONTAINER_REGISTRY}/api-sample:${TAG}
     build:
       context: .
       dockerfile: ./apps/api/template/Dockerfile

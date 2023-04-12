@@ -3,8 +3,9 @@ name: Build Containers
 env:
   src_branch: ${{ github.head_ref || github.ref_name }}
   registry_url: ghcr.io
+  ecr_registry_url: 695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where
   org_name: staycaygowhere
-  app_name: web
+  app_name: applications
 
 on:
   workflow_dispatch:
@@ -32,32 +33,32 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT }}
 
-      # - name: "Configure access to Image Repository"
-      #   uses: aws-actions/configure-aws-credentials@v1-node16
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ap-southeast-1
+      - name: "Configure access to Image Repository"
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
 
-      # - name: "Login to Image Repository"
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
+      - name: "Login to Image Repository"
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
+      # Prepared to push to either ghcr.io or AWS ECR - pick one and set CONTAINER_REGISTRY
+      # in .env for docker-compose to use:
+      # - CONTAINER_REGISTRY="${{ env.registry_url }}/${{ org_name }}"
+      # - CONTAINER_REGISTRY="${{ env.ecr_registry_url }}"
       - name: "Build & Upload Image"
         id: getImageTag
         run: |
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
 
           TAG="${{ env.src_branch }}-${git_hash}"
+          CONTAINER_REGISTRY="${{ env.ecr_registry_url }}"
 
-          echo "TAG=${TAG}" >> $GITHUB_ENV
-          echo "mytag=${TAG}" >> $GITHUB_OUTPUT
-
-          IMAGE_URL="${{ env.registry_url }}/${{ env.org_name }}/${{ env.app_name }}:${TAG}"
-
-          echo "IMAGE_URL=${IMAGE_URL}" >> $GITHUB_ENV
-
-          echo TAG=${TAG} >> .env
+          echo TAG=${TAG}$ >> .env
+          echo $'\n' >> .env
+          echo CONTAINER_REGISTRY=${CONTAINER_REGISTRY} >> .env
 
           docker compose config
           docker compose build
