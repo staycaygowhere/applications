@@ -56,7 +56,7 @@ jobs:
           TAG="${{ env.src_branch }}-${git_hash}"
           CONTAINER_REGISTRY="${{ env.ecr_registry_url }}"
 
-          echo TAG=${TAG}$ >> .env
+          echo TAG=${TAG} >> .env
           echo $'\n' >> .env
           echo CONTAINER_REGISTRY=${CONTAINER_REGISTRY} >> .env
 
