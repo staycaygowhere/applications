@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtine-version:
+      docker: 23
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws -- version
+      - $(aws ecr get-login --region ap-southeast-1 --no-include-email)
+      - REPOSITORY_URI=695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where
+      - COMMIT_HASH=${echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7 }
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Bulding the docker image...
+      - echo TAG=${COMMIT_HASH} >> .env
+      - echo $'\n' >> .env
+      - echo CONTAINER_REGISTRY=${REPOSITORY_URI} >> .env
+      - docker compose config
+      - docker compose build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker compose push
+      - echo Writing image definitions file...
+      - printf '[{"name”:"web","imageUri":"%s"},{"name”:"api-sample","imageUri":"%s"}]' $REPOSITORY_URI/web:$IMAGE_TAG $REPOSITORY_URI/api-sample:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
