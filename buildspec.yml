@@ -2,8 +2,8 @@ version: 0.2
 
 phases:
   install:
-    runtine-version:
-      docker: 23
+    runtime-version:
+      docker: 20
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -20,13 +20,13 @@ phases:
       - echo TAG=${IMAGE_TAG} >> .env
       - echo $'\n' >> .env
       - echo CONTAINER_REGISTRY=${REPOSITORY_URI} >> .env
-      - docker compose config
-      - docker compose build
+      - docker-compose config
+      - docker-compose build
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker compose push
+      - docker-compose push
       - echo Writing image definitions file...
       - printf '[{"name”:"web","imageUri":"%s"},{"name”:"api-sample","imageUri":"%s"}]' $REPOSITORY_URI/web:$IMAGE_TAG $REPOSITORY_URI/api-sample:$IMAGE_TAG > imagedefinitions.json
 artifacts:
