@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws -- version
+      - aws --version
       - $(aws ecr get-login --region ap-southeast-1 --no-include-email)
       - REPOSITORY_URI=695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where
       - COMMIT_HASH=${echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7 }
