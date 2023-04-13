@@ -6,7 +6,7 @@ The best Staycation application in the nation.
 
 -   [x] Automated Build
 -   [x] Automated Publishing (of build artifacts)
--   [ ] Automated Deploy
+-   [ ] Automated Deploy - Note that the method for setting the container registry needs to change to accomodate ECR (was set up for ghcr.io)
 
 ## Developing
 
@@ -46,11 +46,16 @@ Example - Testing the web service:
 
 ## Building and pushing Docker containers
 
-The docker compose file reads the `TAG` from a local `.env` file, in the CI, the tag is generated from the git commit
-hash. To run the compose file manually with the desired tag, you need a create a `.env` file with the desired tag:
+The docker compose file reads the `TAG` and `CONTAINER_REGISTRY` from a local `.env` file, in the CI, the tag is
+generated from the git commit hash. To run the compose file manually with the desired tag, you need a create a `.env`
+file with the desired tag:
 
 ```
-    TAG="6929" > .env
+    TAG="6929" >> .env
+```
+
+```
+    CONTAINER_REGISTRY="..." >> .env
 ```
 
 Then, running build will use your tag (e.g. web service would be built with 'ghcr.io/staycaygowhere/web:6929)
