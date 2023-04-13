@@ -12,13 +12,12 @@ phases:
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $AWS_PREFIX
       - REPOSITORY_URI=$AWS_PREFIX/staycay-go-where
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7 )
- #     - IMAGE_TAG=${COMMIT_HASH:=latest}
-      -IMAGE_TAG=latest
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
       - echo Bulding the docker image...
-      - echo TAG=${IMAGE_TAG} >> .env
+      - echo TAG=latest #${IMAGE_TAG} >> .env
       - echo CONTAINER_REGISTRY=${REPOSITORY_URI} >> .env
       - docker-compose config
       - docker-compose build
