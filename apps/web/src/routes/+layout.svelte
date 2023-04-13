@@ -8,6 +8,9 @@
 
 	import { registerIconLibrary } from '@shoelace-style/shoelace/dist/utilities/icon-library.js';
 	import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+
+	// import Cognito from '$lib/components/auth/Cognito/index.svelte';
+
 	setBasePath('/shoelace');
 
 	registerIconLibrary('custom', {
@@ -16,3 +19,4 @@
 </script>
 
 <slot />
+<!-- <Cognito /> -->

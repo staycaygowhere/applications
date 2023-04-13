@@ -1,38 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import * as jose from 'jose';
-	import type { PageData } from './$types';
-	export let data: PageData;
 
-	// onMount(async () => {
-	// 	(function (d, s, id) {
-	// 		var js,
-	// 			fjs = d.getElementsByTagName(s)[0];
-	// 		if (d.getElementById(id)) {
-	// 			return;
-	// 		}
-	// 		js = d.createElement(s);
-	// 		js.id = id;
-	// 		js.src = 'https://connect.facebook.net/en_US/sdk.js';
-	// 		fjs.parentNode.insertBefore(js, fjs);
-	// 	})(document, 'script', 'facebook-jssdk');
+	export let google_client_id: string;
 
-	// 	window.fbAsyncInit = function () {
-	// 		FB.init({
-	// 			appId: '{your-app-id}',
-	// 			cookie: true,
-	// 			xfbml: true,
-	// 			version: '{api-version}'
-	// 		});
-
-	// 		FB.AppEvents.logPageView();
-	// 	};
-	// });
-
-	globalThis.handleGoogleCredentials = async (data) => {
-		console.log(data, 'See Token Stuff');
+	globalThis.handleGoogleCredentials = async (data: { credential: string }) => {
 		const decoded = jose.decodeJwt(data.credential);
-		console.log(decoded, 'See Decoded');
 	};
 </script>
 
@@ -47,7 +19,7 @@
 			<div>
 				<div
 					id="g_id_onload"
-					data-client_id={data.GOOGLE_CLIENT_ID}
+					data-client_id={google_client_id}
 					data-context="signin"
 					data-ux_mode="popup"
 					data-callback="handleGoogleCredentials"
