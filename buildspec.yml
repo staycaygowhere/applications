@@ -12,8 +12,7 @@ phases:
       - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $AWS_PREFIX
       - REPOSITORY_URI=$AWS_PREFIX/staycay-go-where
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7 )
-      - IAMGE_TAG=latest
-#      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
@@ -28,6 +27,6 @@ phases:
       - echo Pushing the Docker images...
       - docker-compose push
       - echo Writing image definitions file...
-      - printf '[{"name":"web","imageUri":"%s"},{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"web","imageUri":"%s"},{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
