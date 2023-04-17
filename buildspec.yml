@@ -29,4 +29,6 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"web","imageUri":"%s"},{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions.json
 artifacts:
-  files: imagedefinitions.json
+  files: 
+    - imagedefinitions.json
+    - appspec.yaml

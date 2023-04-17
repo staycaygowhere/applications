@@ -1,0 +1,14 @@
+version: 0.0
+Resources:
+ - TargetService:
+     Type: AWS::ECS::Service
+     Properties:
+       TaskDefinition: staycay-go-where-web
+       LoadBalancerInfo:
+       -  ContainerName: web # copy from task definition under containerDefinitions.name
+          ContainerPort: 3000 # an application container port 
+       -  ContainerName: api-sample # copy from task definition under containerDefinitions.name
+          ContainerPort: 5000 # an application container port 
+          
+         
+        
