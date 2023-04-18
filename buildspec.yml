@@ -27,9 +27,10 @@ phases:
       - echo Pushing the Docker images...
       - docker-compose push
       - echo Writing image definitions file...
-      - printf '[{"name":"web","imageUri":"%s"},{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"web","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions-web.json
+      - printf '[{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions-api-sample.json
 artifacts:
   files: 
-    - imagedefinitions.json
+    - imagedefinitions*
+    - taskdef*
     - appspec.yaml
-    - taskdef.json

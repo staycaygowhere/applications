@@ -3,12 +3,9 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-#        TaskDefinition: !Sub "arn:aws:ecs:ap-southeast-1:695137441790:task-definition/staycay-go-where-web:6"
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
           ContainerName: "web"
           ContainerPort: "3000"
-          ContainerName: "api-sample" 
-          ContainerPort: "5000" 
        
            
