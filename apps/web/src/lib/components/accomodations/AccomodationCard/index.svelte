@@ -1,7 +1,17 @@
 <script lang="ts">
 	import '@shoelace-style/shoelace/dist/components/card/card.js';
 	// import type { PageData } from './$types';
-
+	function fetchData() {
+		fetch("http://staycay-api-lb-1752034959.ap-southeast-1.elb.amazonaws.com/")
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				alert(data);
+			}).catch(error => {
+				console.log(error);
+				return [];
+			});
+	}
 	// export let data: PageData;
 </script>
 
@@ -18,7 +28,7 @@
 		<small>6 weeks old</small>
 
 		<div slot="footer">
-			<sl-button variant="primary" pill>More Info</sl-button>
+			<sl-button variant="primary" pill on:click|once={fetchData}>More Info</sl-button>
 			<sl-rating />
 		</div>
 	</sl-card>
