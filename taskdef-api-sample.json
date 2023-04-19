@@ -56,7 +56,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:695137441790:task-definition/staycay-go-where-web:6",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:695137441790:task-definition/staycay-go-api-sample:1",
   "family": "staycay-go-where-web",
   "requiresAttributes": [
     {
