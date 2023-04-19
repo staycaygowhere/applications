@@ -6,6 +6,6 @@ Resources:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
           ContainerName: "api-sample"
-          ContainerPort: "3000"
+          ContainerPort: "5000"
        
            

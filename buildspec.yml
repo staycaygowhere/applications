@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-version:
-      docker: 20
+      docker: 20      
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -27,7 +27,7 @@ phases:
       - echo Pushing the Docker images...
       - docker-compose push
       - echo Writing image definitions file...
-      - printf '[{"name":"web","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions-web.json
+      - printf '[{"name":"web","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG > imagedefinitions-web.json
       - printf '[{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions-api-sample.json
 artifacts:
   files: 
