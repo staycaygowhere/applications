@@ -29,7 +29,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where:api-sample-330b5c3",
+      "image": "695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where:api-sample-IMAGE_TAG",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -57,7 +57,7 @@
     "FARGATE"
   ],
   "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:695137441790:task-definition/staycay-go-api-sample:1",
-  "family": "staycay-go-where-web",
+  "family": "staycay-go-where-api-sample",
   "requiresAttributes": [
     {
       "targetId": null,
