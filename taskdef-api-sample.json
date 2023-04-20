@@ -2,7 +2,7 @@
   "family": "SGW-API",
   "containerDefinitions": [
     {
-      "name": "web",
+      "name": "api-sample",
       "image": "695137441790.dkr.ecr.ap-southeast-1.amazonaws.com/staycay-go-where:api-sample-IMAGE_TAG",
       "cpu": 256,
       "memory": 512,
