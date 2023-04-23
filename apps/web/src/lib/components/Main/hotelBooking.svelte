@@ -1,3 +1,4 @@
+
 <script>
 	let checkInDate = '';
 	let checkOutDate = '';
@@ -14,10 +15,12 @@
 		// and send it to a backend server for further processing
   }
  </script>
-  
+ 
+
 <style>
-	@import './form.css';
-	/* Reset some default styles for consistency */
+@import './form.css';
+
+/* Reset some default styles for consistency */
 body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
@@ -45,71 +48,12 @@ h1 {
   margin-bottom: 20px;
 }
 
-p {
-  font-size: 18px;
-  color: #666;
-}
-
-section {
-  margin-bottom: 40px;
-}
-
-.hotel-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.hotel-item {
-  border: 1px solid #ddd;
-  padding: 20px;
-  background-color: #fff;
-}
-
-.hotel-item img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.hotel-item h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.features-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.features-list li {
-  flex: 1;
-  text-align: center;
-  padding: 20px;
-  background-color: #fff;
-}
-
-.features-list img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.features-list h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.features-list p {
-  font-size: 18px;
-  color: #666;
-}
 
   </style>
   
+
   <main>
-	<header>
+	<body>
 		<form on:submit|preventDefault={submitForm} class="booking-form">
 			<div class="form-header">
 				<h1>Make your reservation</h1>
@@ -158,6 +102,6 @@ section {
 			
 			<button class="submit-btn"type="submit">Book Now</button>
 		</div>
-		
+	</body>
   </main>
   
