@@ -7,5 +7,10 @@
 
 <div class="w-full flex flex-row justify-between p-5">
 	<sl-icon class="text-9xl select-none" library="custom" name="logo" />
+	
+		<a href="/">Home</a> 
+		<a href="/accomodations">Accomodations</a>
+		<a href="/auth/login">Login</a> 
+
 	<sl-avatar label="User avatar" />
 </div>
