@@ -29,6 +29,9 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"web","imageUri":"%s"}]' $REPOSITORY_URI:web-$IMAGE_TAG > imagedefinitions-web.json
       - printf '[{"name":"api-sample","imageUri":"%s"}]' $REPOSITORY_URI:api-sample-$IMAGE_TAG > imagedefinitions-api-sample.json
+      - echo "Update the taskdef.json file with the latest image"
+      - sed -i "s/IMAGE_TAG/$IMAGE_TAG/g" taskdef-web.json
+      - sed -i "s/IMAGE_TAG/$IMAGE_TAG/g" taskdef-api-sample.json
 artifacts:
   files: 
     - imagedefinitions*.json
