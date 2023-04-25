@@ -10,7 +10,7 @@ import { getSession, refreshAccessToken, type CognitoUserSessionType } from "$li
 // Type of the user object returned from the Cognito service
 import type { AuthUser } from "$lib/auth/types/AuthUser";
 // Import the secret key from the environment variables
-import { COGNITO_CLIENT_SECRET } from "$env/static/private";
+import { COGNITO_CLIENT_SECRET } from "./config.ts";
 
 interface AuthToken {
   accessToken: string;

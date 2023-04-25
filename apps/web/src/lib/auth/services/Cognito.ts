@@ -2,7 +2,7 @@
  * @file Cognito.ts
  * File containing the Cognito service
  */
-import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '$env/static/private';
+import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '../../../config';
 import { AuthenticationDetails, CognitoRefreshToken, CognitoUser, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js'; 
 export type CognitoUserSessionType = CognitoUserSession;
