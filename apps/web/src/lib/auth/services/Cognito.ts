@@ -4,6 +4,7 @@
  */
 import { COGNITO_USER_POOL_ID, COGNITO_CLIENT_ID } from '$env/static/private';
 import { AuthenticationDetails, CognitoRefreshToken, CognitoUser, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
+import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js'; 
 export type CognitoUserSessionType = CognitoUserSession;
 const CONFIGS = {
     UserPoolId: COGNITO_USER_POOL_ID,
@@ -21,13 +22,64 @@ const User = (Username: string): CognitoUser => new CognitoUser({ Username, Pool
  * @param Password - Password of the user to login
  * @returns - Promise with the result of the login
  */
-export const getSession = (Username: string, Password: string): Promise<CognitoUserSession> => {
+
+
+export const getResponse = (Username: string, Password: string): Promise<CognitoUserSession> => {
     return new Promise((resolve, reject) =>
-        User(Username).authenticateUser(new AuthenticationDetails({ Username, Password }), {
+            User(Username).authenticateUser(new AuthenticationDetails({ Username, Password }), {
             onSuccess: resolve,
             onFailure: reject,
-        })
+            newPasswordRequired: resolve, //, <-- callback = newPasswordRequired. HOW TO HANDLE
+        }
+        )       
     );
+    
+};;
+
+
+// function ( /*userAttributes, requiredAttributes */) {
+//     //delete userAttributes.email_verified;
+//     User(Username).completeNewPasswordChallenge('DemoPassword1!', /*userAttributes*/"", {
+//         onSuccess: (data) => {
+//             console.log(data);
+//         },
+        
+//         onFailure: function (err) {
+//         alert(err);
+//     }
+// }
+
+
+
+
+
+export const getSession = (Username: string, Password: string): Promise<CognitoUserSession> => {
+    var cognitoUser = User(Username);
+    return new Promise((resolve, reject) => 
+            cognitoUser.authenticateUser(new AuthenticationDetails({ Username, Password }) , {
+            onSuccess: resolve,
+            onFailure: reject,
+            newPasswordRequired: function (userAttributes, requiredAttributes) {
+               
+                delete userAttributes.email_verified;
+                delete userAttributes.email;
+                cognitoUser.completeNewPasswordChallenge('Password1!', userAttributes, { // <<--- how to pass from first new CognitoUser over and not create a seperate session
+                  onSuccess: resolve => {
+
+                    console.log(resolve);
+                  },
+                  onFailure: function (err) {
+                    console.log("test");
+                    console.log(err)
+                    console.log("test1");
+                    //alert(err);
+                  }
+                });
+              }, //, <-- callback = newPasswordRequired. HOW TO HANDLE
+        }
+        )       
+    );
+    
 };
 /**
  * Refresh the access token of the provided user.
@@ -44,6 +96,7 @@ export const refreshAccessToken = async (sessionData: {
     if (!cognitoUser) {
         throw new Error('No user found');
     }
+    
     // Refresh the session
     const RefreshToken = new CognitoRefreshToken({
         RefreshToken: sessionData.refreshToken,

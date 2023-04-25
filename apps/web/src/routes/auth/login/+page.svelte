@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { signIn } from '@auth/sveltekit/client';
-	import { invalidateAll } from '$app/navigation';
-	const handleSubmit = async (event: any) => {
-		const data = new FormData(event.target);
-		try {
-			await signIn('credentials', {
-				email: data.get('email'),
-				password: data.get('password')
-			});
-		} catch (error) {
-			await invalidateAll();
-		}
-	};
+  import { signIn } from "@auth/sveltekit/client"
+  import { invalidateAll } from '$app/navigation';
+  const handleSubmit = async (event: any) => {
+    const data = new FormData(event.target);
+    try {
+      await signIn('credentials', {
+        email: data.get('email'),
+        password: data.get('password')
+      });
+    } catch (error) {
+      await invalidateAll();
+    }
+  }
+  
 </script>
 <header>
 
